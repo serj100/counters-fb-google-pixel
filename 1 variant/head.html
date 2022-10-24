@@ -10,21 +10,22 @@
 	crossorigin="anonymous"
 	referrerpolicy="no-referrer"
 ></script>
-
 <script>
 	// ---START---Парсинг URL, затем добавление значений ymc, pixid и gua в куки, если значения есть в url...---
 	// время юзания куков
 	var expires = new Date()
 	// инкрементим к текущей дате время юзания куков
 	expires.setTime(expires.getTime() + 5 * 24 * 60 * 60 * 1000)
-	// делаем записи в куки, если gua, pixid, ymc есть в url
-	if (!isNaN('{gua}') === true)
+	// делаем записи в куки, если gua, pixid, ymc есть в url и в куках нет этих значений
+	if (!isNaN('{gua}') === true) {
 		$.cookie('gua', '{gua}', { expires: expires, path: '/' })
-	if (!isNaN('{pixid}') === true)
+	}
+	if (!isNaN('{pixid}') === true) {
 		$.cookie('pixid', '{pixid}', { expires: expires, path: '/' })
-	if (!isNaN('{ymc}') === true)
+	}
+	if (!isNaN('{ymc}') === true) {
 		$.cookie('ymc', '{ymc}', { expires: expires, path: '/' })
+	}
 	// ---END---Парсинг URL, затем добавление значений ymc, pixid и gua в куки, если значения есть в url...---
 </script>
-
 <meta name="referrer" content="no-referrer" />

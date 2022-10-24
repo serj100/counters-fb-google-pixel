@@ -1,3 +1,5 @@
+<meta name="referrer" content="no-referrer" />
+
 <script async src="https://www.googletagmanager.com/gtag/js?id={gua}"></script>
 <script
 	src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -12,38 +14,10 @@
 ></script>
 
 <script>
-	// ---START---Парсинг cookie, затем добавление значений в функции счетчиков ymc, pixid и gua---
-	// Считываем из кук pixid, gua и ymc, если они присутсвуют
 	var pixidCookie = $.cookie('pixid') ? $.cookie('pixid') : undefined
 	var guaCookie = $.cookie('gua') ? $.cookie('gua') : undefined
 	var ymcCookie = $.cookie('ymc') ? $.cookie('ymc') : undefined
-	// функция забирает значения параметров в url
-	function getParameterByName(name, url = window.location.href) {
-		name = name.replace(/[\[\]]/g, '\\$&')
-		var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-			results = regex.exec(url)
-		if (!results) return null
-		if (!results[2]) return ''
-		return decodeURIComponent(results[2].replace(/\+/g, ' '))
-	}
-	//функция добаления параметров в строку url
-	function addOrUpdateUrlParam(name, value) {
-		var href = window.location.href
-		var regex = new RegExp('[&\\?]' + name + '=')
-		if (href.indexOf('?') > -1) {
-			history.pushState(null, null, href + '&' + name + '=' + value)
-		} else {
-			history.pushState(null, null, href + '?' + name + '=' + value)
-		}
-	}
-	// ymc, pixid и gua
-	var guaFromUrl = getParameterByName('gua')
-	var pixidFromUrl = getParameterByName('pixid')
-	var ymcFromUrl = getParameterByName('ymc')
-	// добавляем в url параметры, ели они есть в куках, но их нет в url
-	if (!guaFromUrl && guaCookie) addOrUpdateUrlParam('gua', guaCookie)
-	if (!pixidFromUrl && pixidCookie) addOrUpdateUrlParam('pixid', pixidCookie)
-	if (!ymcFromUrl && ymcCookie) addOrUpdateUrlParam('ymc', ymcCookie)
+
 	// блок счетчика Facebook Pixel
 	!(function (f, b, e, v, n, t, s) {
 		if (f.fbq) return
@@ -66,14 +40,15 @@
 		'script',
 		'https://connect.facebook.net/en_US/fbevents.js'
 	)
-	fbq('init', '{pixid}')
-	// блок счетчика Facebook Google
+	fbq('init', pixidCookie)
+	fbq('track', 'Lead')
+	// блок счетчика Google
 	window.dataLayer = window.dataLayer || []
 	function gtag() {
 		dataLayer.push(arguments)
 	}
 	gtag('js', new Date())
-	gtag('{gua}')
+	gtag(guaCookie)
 	// блок счетчика Yandex.Metrika
 	;(function (m, e, t, r, i, k, a) {
 		m[i] =
@@ -93,17 +68,10 @@
 			(k.src = r),
 			a.parentNode.insertBefore(k, a)
 	})(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
-	ym('{ymc}', 'init', {
+	ym(ymcCookie, 'init', {
 		clickmap: true,
 		trackLinks: true,
 		accurateTrackBounce: true,
 		webvisor: true,
 	})
-	// End Yandex.Metrika counter
-	// хендлер сабмита в форме
-	$('#form').submit(function (event) {
-		fbq('track', 'Lead')
-		console.log('clicked')
-	})
-	// ---END---Парсинг cookie, затем добавление значений в функции счетчиков ymc, pixid и gua---
 </script>
