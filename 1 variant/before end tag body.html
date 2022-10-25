@@ -1,121 +1,115 @@
-<script
-	src="https://code.jquery.com/jquery-3.6.1.min.js"
-	integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-	crossorigin="anonymous"
-></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
-	integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
-	crossorigin="anonymous"
-	referrerpolicy="no-referrer"
-></script>
+<head>
+	<meta name="referrer" content="no-referrer" />
+</head>
 
-<script>
-	$('#gtagscript').attr(
-		'src',
-		'https://www.googletagmanager.com/gtag/js?id=' + $.cookie('gua')
-			? $.cookie('gua')
-			: undefined
-	)
-</script>
-<script id="gtagscript" src="#" async></script>
+<body>
+	<script>
+		// ---START---Парсинг cookie, затем добавление значений в функции счетчиков ymc, pixid и gua---
+		// Считываем из кук pixid, gua и ymc, если они присутсвуют
+		var pixidCookie = $.cookie('pixid') ? $.cookie('pixid') : undefined
+		var guaCookie = $.cookie('gua') ? $.cookie('gua') : undefined
+		var ymcCookie = $.cookie('ymc') ? $.cookie('ymc') : undefined
 
-<script>
-	// ---START---Парсинг cookie, затем добавление значений в функции счетчиков ymc, pixid и gua---
-	// Считываем из кук pixid, gua и ymc, если они присутсвуют
-	var pixidCookie = $.cookie('pixid') ? $.cookie('pixid') : undefined
-	var guaCookie = $.cookie('gua') ? $.cookie('gua') : undefined
-	var ymcCookie = $.cookie('ymc') ? $.cookie('ymc') : undefined
-
-	// функция забирает значения параметров в url
-	function getParameterByName(name, url = window.location.href) {
-		name = name.replace(/[\[\]]/g, '\\$&')
-		var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-			results = regex.exec(url)
-		if (!results) return null
-		if (!results[2]) return ''
-		return decodeURIComponent(results[2].replace(/\+/g, ' '))
-	}
-	//функция добаления параметров в строку url
-	function addOrUpdateUrlParam(name, value) {
-		var href = window.location.href
-		var regex = new RegExp('[&\\?]' + name + '=')
-		if (href.indexOf('?') > -1) {
-			history.pushState(null, null, href + '&' + name + '=' + value)
-		} else {
-			history.pushState(null, null, href + '?' + name + '=' + value)
+		// функция забирает значения параметров в url
+		function getParameterByName(name, url = window.location.href) {
+			name = name.replace(/[\[\]]/g, '\\$&')
+			var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+				results = regex.exec(url)
+			if (!results) return null
+			if (!results[2]) return ''
+			return decodeURIComponent(results[2].replace(/\+/g, ' '))
 		}
-	}
-	// ymc, pixid и gua
-	var guaFromUrl = getParameterByName('gua')
-	var pixidFromUrl = getParameterByName('pixid')
-	var ymcFromUrl = getParameterByName('ymc')
 
-	// добавляем в url параметры, ели они есть в куках, но их нет в url
-	if (!guaFromUrl && guaCookie) addOrUpdateUrlParam('gua', guaCookie)
-	if (!pixidFromUrl && pixidCookie) addOrUpdateUrlParam('pixid', pixidCookie)
-	if (!ymcFromUrl && ymcCookie) addOrUpdateUrlParam('ymc', ymcCookie)
-
-	// блок счетчика Facebook Pixel
-	!(function (f, b, e, v, n, t, s) {
-		if (f.fbq) return
-		n = f.fbq = function () {
-			n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-		}
-		if (!f._fbq) f._fbq = n
-		n.push = n
-		n.loaded = !0
-		n.version = '2.0'
-		n.queue = []
-		t = b.createElement(e)
-		t.async = !0
-		t.src = v
-		s = b.getElementsByTagName(e)[0]
-		s.parentNode.insertBefore(t, s)
-	})(
-		window,
-		document,
-		'script',
-		'https://connect.facebook.net/en_US/fbevents.js'
-	)
-	fbq('init', '{pixid}')
-	// блок счетчика Google
-	window.dataLayer = window.dataLayer || []
-	function gtag() {
-		dataLayer.push(arguments)
-	}
-	gtag('js', new Date())
-	gtag('{gua}')
-	// блок счетчика Yandex.Metrika
-	;(function (m, e, t, r, i, k, a) {
-		m[i] =
-			m[i] ||
-			function () {
-				;(m[i].a = m[i].a || []).push(arguments)
-			}
-		m[i].l = 1 * new Date()
-		for (var j = 0; j < document.scripts.length; j++) {
-			if (document.scripts[j].src === r) {
-				return
+		//функция добаления параметров в строку url
+		function addOrUpdateUrlParam(name, value) {
+			var href = window.location.href
+			var regex = new RegExp('[&\\?]' + name + '=')
+			if (href.indexOf('?') > -1) {
+				history.pushState(null, null, href + '&' + name + '=' + value)
+			} else {
+				history.pushState(null, null, href + '?' + name + '=' + value)
 			}
 		}
-		;(k = e.createElement(t)),
-			(a = e.getElementsByTagName(t)[0]),
-			(k.async = 1),
-			(k.src = r),
-			a.parentNode.insertBefore(k, a)
-	})(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
-	ym('{ymc}', 'init', {
-		clickmap: true,
-		trackLinks: true,
-		accurateTrackBounce: true,
-		webvisor: true,
-	})
-	// End Yandex.Metrika counter
-	// хендлер сабмита в форме
-	$('#form').submit(function (event) {
-		fbq('track', 'Lead')
-		console.log('clicked')
-	})
-	// ---END---Парсинг cookie, затем добавление значений в функции счетчиков ymc, pixid и gua---
-</script>
+
+		// ymc, pixid и gua
+		var guaFromUrl = getParameterByName('gua')
+		var pixidFromUrl = getParameterByName('pixid')
+		var ymcFromUrl = getParameterByName('ymc')
+
+		// добавляем в url параметры, ели они есть в куках, но их нет в url
+		if (!guaFromUrl && guaCookie) addOrUpdateUrlParam('gua', guaCookie)
+		if (!pixidFromUrl && pixidCookie) addOrUpdateUrlParam('pixid', pixidCookie)
+		if (!ymcFromUrl && ymcCookie) addOrUpdateUrlParam('ymc', ymcCookie)
+
+		// блок счетчика Facebook Pixel
+		!(function (f, b, e, v, n, t, s) {
+			if (f.fbq) return
+			n = f.fbq = function () {
+				n.callMethod
+					? n.callMethod.apply(n, arguments)
+					: n.queue.push(arguments)
+			}
+			if (!f._fbq) f._fbq = n
+			n.push = n
+			n.loaded = !0
+			n.version = '2.0'
+			n.queue = []
+			t = b.createElement(e)
+			t.async = !0
+			t.src = v
+			s = b.getElementsByTagName(e)[0]
+			s.parentNode.insertBefore(t, s)
+		})(
+			window,
+			document,
+			'script',
+			'https://connect.facebook.net/en_US/fbevents.js'
+		)
+		fbq('init', '{pixid}')
+
+		// блок счетчика Google
+		;(function (w, d, s, l, i) {
+			w[l] = w[l] || []
+			w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+			var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s),
+				dl = l != 'dataLayer' ? '&l=' + l : ''
+			j.async = true
+			j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+			f.parentNode.insertBefore(j, f)
+		})(window, document, 'script', 'dataLayer', '{gua}')
+
+		// блок счетчика Yandex.Metrika
+		;(function (m, e, t, r, i, k, a) {
+			m[i] =
+				m[i] ||
+				function () {
+					;(m[i].a = m[i].a || []).push(arguments)
+				}
+			m[i].l = 1 * new Date()
+			for (var j = 0; j < document.scripts.length; j++) {
+				if (document.scripts[j].src === r) {
+					return
+				}
+			}
+			;(k = e.createElement(t)),
+				(a = e.getElementsByTagName(t)[0]),
+				(k.async = 1),
+				(k.src = r),
+				a.parentNode.insertBefore(k, a)
+		})(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
+		ym('{ymc}', 'init', {
+			clickmap: true,
+			trackLinks: true,
+			accurateTrackBounce: true,
+			webvisor: true,
+		})
+
+		// хендлер сабмита в форме
+		$('#form').submit(function (event) {
+			fbq('track', 'Lead')
+			console.log('clicked')
+		})
+		// ---END---Парсинг cookie, затем добавление значений в функции счетчиков ymc, pixid и gua---
+	</script>
+</body>
