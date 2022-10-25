@@ -1,6 +1,6 @@
 # Три в одном. Facebook pixel, Google tag и Yandex Метрика
 
-![image-20221025120335800](countersPic.png)
+![counters_Pic](counters_Pic.png)
 
 ### 1 variant
 
