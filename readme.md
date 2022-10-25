@@ -1,4 +1,4 @@
-# Три в одном. Facebook pixel, Google tag и Yandex Метрика
+# Три в одном. Facebook pixel, Google tag и Yandex Метрика (Keitaro)
 
 ![counters_Pic](counters_Pic.png)
 
