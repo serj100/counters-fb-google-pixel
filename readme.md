@@ -29,7 +29,7 @@ $('.form__steps').submit(function (event) {
 
 2 variant - для офферов со страницей «спасибо».
 
-Содержимое файла **head.html** устанавливается в index.html (php), а содержмое файла **before end tag body.html** устанавливается перед закрывающим тегом **body**.
+Содержимое файла **head.html** устанавливается в index.html (php), а содержмое файла **before end tag body.html** устанавливается перед закрывающим тегом **body** в странице «спасибо».
 
 
 
