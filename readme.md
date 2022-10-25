@@ -1,6 +1,6 @@
 # Три в одном. Facebook pixel, Google tag и Yandex Метрика
 
-![image-20221025120335800](C:\Users\serj100\AppData\Roaming\Typora\typora-user-images\image-20221025120335800.png)
+![image-20221025120335800](countersPic.png)
 
 ### 1 variant
 
