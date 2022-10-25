@@ -1,4 +1,3 @@
-<script async src="https://www.googletagmanager.com/gtag/js?id={gua}"></script>
 <script
 	src="https://code.jquery.com/jquery-3.6.1.min.js"
 	integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -12,11 +11,22 @@
 ></script>
 
 <script>
+	$('#gtagscript').attr(
+		'src',
+		'https://www.googletagmanager.com/gtag/js?id=' + $.cookie('gua')
+			? $.cookie('gua')
+			: undefined
+	)
+</script>
+<script id="gtagscript" src="#" async></script>
+
+<script>
 	// ---START---Парсинг cookie, затем добавление значений в функции счетчиков ymc, pixid и gua---
 	// Считываем из кук pixid, gua и ymc, если они присутсвуют
 	var pixidCookie = $.cookie('pixid') ? $.cookie('pixid') : undefined
 	var guaCookie = $.cookie('gua') ? $.cookie('gua') : undefined
 	var ymcCookie = $.cookie('ymc') ? $.cookie('ymc') : undefined
+
 	// функция забирает значения параметров в url
 	function getParameterByName(name, url = window.location.href) {
 		name = name.replace(/[\[\]]/g, '\\$&')
@@ -69,7 +79,7 @@
 		'https://connect.facebook.net/en_US/fbevents.js'
 	)
 	fbq('init', '{pixid}')
-	// блок счетчика Facebook Google
+	// блок счетчика Google
 	window.dataLayer = window.dataLayer || []
 	function gtag() {
 		dataLayer.push(arguments)

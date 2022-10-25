@@ -1,6 +1,5 @@
 <meta name="referrer" content="no-referrer" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id={gua}"></script>
 <script
 	src="https://code.jquery.com/jquery-3.6.1.min.js"
 	integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -12,6 +11,16 @@
 	crossorigin="anonymous"
 	referrerpolicy="no-referrer"
 ></script>
+
+<script>
+	$('#gtagscript').attr(
+		'src',
+		'https://www.googletagmanager.com/gtag/js?id=' + $.cookie('gua')
+			? $.cookie('gua')
+			: undefined
+	)
+</script>
+<script id="gtagscript" async src="#"></script>
 
 <script>
 	var pixidCookie = $.cookie('pixid') ? $.cookie('pixid') : undefined
