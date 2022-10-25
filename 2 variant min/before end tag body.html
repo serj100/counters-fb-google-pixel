@@ -1,0 +1,21 @@
+<head>
+	<meta name="referrer" content="no-referrer" />
+</head>
+
+<body>
+	<script
+		src="https://code.jquery.com/jquery-3.6.1.min.js"
+		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+		crossorigin="anonymous"
+	></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+		integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"
+	></script>
+
+	<script>
+		var pixidCookie=$.cookie("pixid")?$.cookie("pixid"):void 0,guaCookie=$.cookie("gua")?$.cookie("gua"):void 0,ymcCookie=$.cookie("ymc")?$.cookie("ymc"):void 0;!function(e,t,o,a,i,c,n){e.fbq||(i=e.fbq=function(){i.callMethod?i.callMethod.apply(i,arguments):i.queue.push(arguments)},e._fbq||(e._fbq=i),i.push=i,i.loaded=!0,i.version="2.0",i.queue=[],(c=t.createElement(o)).async=!0,c.src=a,(n=t.getElementsByTagName(o)[0]).parentNode.insertBefore(c,n))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js"),fbq("init",pixidCookie),fbq("track","Lead"),function(e,t,o,a,i){e[a]=e[a]||[],e[a].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var c=t.getElementsByTagName(o)[0],n=t.createElement(o);n.async=!0,n.src="https://www.googletagmanager.com/gtm.js?id="+i+("dataLayer"!=a?"&l="+a:""),c.parentNode.insertBefore(n,c)}(window,document,"script","dataLayer",guaCookie),function(e,t,o,a,i,c,n){e[i]=e[i]||function(){(e[i].a=e[i].a||[]).push(arguments)},e[i].l=1*new Date;for(var r=0;r<document.scripts.length;r++)if(document.scripts[r].src===a)return;c=t.createElement(o),n=t.getElementsByTagName(o)[0],c.async=1,c.src=a,n.parentNode.insertBefore(c,n)}(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym"),ym(ymcCookie,"init",{clickmap:!0,trackLinks:!0,accurateTrackBounce:!0});
+	</script>
+</body>
