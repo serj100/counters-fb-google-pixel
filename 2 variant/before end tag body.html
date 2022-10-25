@@ -21,7 +21,7 @@
 		var pixidCookie = $.cookie('pixid') ? $.cookie('pixid') : undefined
 		var guaCookie = $.cookie('gua') ? $.cookie('gua') : undefined
 		var ymcCookie = $.cookie('ymc') ? $.cookie('ymc') : undefined
-
+	
 		// блок счетчика Facebook Pixel
 		!(function (f, b, e, v, n, t, s) {
 			if (f.fbq) return
@@ -47,6 +47,7 @@
 			'https://connect.facebook.net/en_US/fbevents.js'
 		)
 		fbq('init', pixidCookie)
+		fbq('track', 'Lead')
 
 		// блок счетчика Google
 		;(function (w, d, s, l, i) {
@@ -67,7 +68,7 @@
 				function () {
 					;(m[i].a = m[i].a || []).push(arguments)
 				}
-			m[i].l = 1 * new Date()
+			m[i].l = 1 * new Date() 
 			for (var j = 0; j < document.scripts.length; j++) {
 				if (document.scripts[j].src === r) {
 					return

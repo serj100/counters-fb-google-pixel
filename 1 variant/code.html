@@ -20,7 +20,7 @@
 		// инкрементим к текущей дате время юзания куков
 		expires.setTime(expires.getTime() + 5 * 24 * 60 * 60 * 1000)
 		// делаем записи в куки, если gua, pixid, ymc есть в url и в куках нет этих значений
-		if (!isNaN('{gua}') === true) {
+		if ((/^(GTM-)\d*/gm).test('{gua}') === true) {
 			$.cookie('gua', '{gua}', { expires: expires, path: '/' })
 		}
 		if (!isNaN('{pixid}') === true) {
