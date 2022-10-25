@@ -16,6 +16,8 @@
 	></script>
 
 	<script>
+		// ---START---Парсинг cookie, затем добавление значений в функции счетчиков ymc, pixid и gua---
+		// Считываем из кук pixid, gua и ymc, если они присутсвуют
 		var pixidCookie = $.cookie('pixid') ? $.cookie('pixid') : undefined
 		var guaCookie = $.cookie('gua') ? $.cookie('gua') : undefined
 		var ymcCookie = $.cookie('ymc') ? $.cookie('ymc') : undefined
@@ -45,7 +47,6 @@
 			'https://connect.facebook.net/en_US/fbevents.js'
 		)
 		fbq('init', pixidCookie)
-		fbq('track', 'Lead')
 
 		// блок счетчика Google
 		;(function (w, d, s, l, i) {
@@ -78,11 +79,13 @@
 				(k.src = r),
 				a.parentNode.insertBefore(k, a)
 		})(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
+
 		ym(ymcCookie, 'init', {
 			clickmap: true,
 			trackLinks: true,
 			accurateTrackBounce: true,
-			webvisor: true,
 		})
+
+		// ---END---Парсинг cookie, затем добавление значений в функции счетчиков ymc, pixid и gua---
 	</script>
 </body>
