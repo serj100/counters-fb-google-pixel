@@ -5,29 +5,21 @@
 		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
 		crossorigin="anonymous"
 	></script>
-
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
 		integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
 		crossorigin="anonymous"
 		referrerpolicy="no-referrer"
 	></script>
+	<!-- блок сохранения id счетчиков в куки из url -->
 	<script>
-		// ---START---Парсинг URL, затем добавление значений ymc, pixid и gua в куки, если значения есть в url...---
-		// время юзания куков
 		var expires = new Date()
-		// инкрементим к текущей дате время юзания куков
 		expires.setTime(expires.getTime() + 5 * 24 * 60 * 60 * 1000)
-		// делаем записи в куки, если gua, pixid, ymc есть в url и в куках нет этих значений
-		if ((/^(GTM-)\d*/gm).test('{gua}') === true) {
+		if (!'{gua}'.includes('{') === true)
 			$.cookie('gua', '{gua}', { expires: expires, path: '/' })
-		}
-		if (!isNaN('{pixid}') === true) {
+		if (!'{pixid}'.includes('{') === true)
 			$.cookie('pixid', '{pixid}', { expires: expires, path: '/' })
-		}
-		if (!isNaN('{ymc}') === true) {
+		if (!'{ymc}'.includes('{') === true)
 			$.cookie('ymc', '{ymc}', { expires: expires, path: '/' })
-		}
-		// ---END---Парсинг URL, затем добавление значений ymc, pixid и gua в куки, если значения есть в url...---
 	</script>
 </head>

@@ -6,12 +6,15 @@
 
 1 variant - для офферов, где все действия происходят на одной странице, затем по результату этих действйи срабатывает handler:
 
-```js
-// хендлер сабмита в форме
-$('.form__steps').submit(function (event) {
-	fbq('track', 'Lead')
-	console.log("отработал fbq('track', 'Lead')")
-})
+```html
+	<script>
+		// хендлер сабмита в форме
+		$('#form__steps').submit(function (event) {
+			fbq('track', 'Lead')
+			gtag('event', 'Lead')
+			console.log("отработал fbq('track', 'Lead') и gtag('event', 'Lead')")
+		})
+	</script>
 ```
 
 Для работы хендлера нужно добавить атрибут id к форме, пример:
@@ -29,7 +32,7 @@ $('.form__steps').submit(function (event) {
 
 2 variant - для офферов со страницей «спасибо».
 
-Содержимое файла **head.html** устанавливается в index.html (php), а содержмое файла **before end tag body.html** устанавливается перед закрывающим тегом **body** в странице «спасибо».
+Содержимое файла **first page.html** устанавливается в index.html (php), а содержмое файла **second page.html** устанавливается в странице «спасибо».
 
 
 
@@ -38,6 +41,5 @@ $('.form__steps').submit(function (event) {
 ### Через url, пример:
 
 ```url
-https://domain.com?pixid=388666732323822&gua=GTM-123456&ymc=90910377
+https://domain.com?pixid=388666732323826&gua=UA-232124918-1&ymc=90910377
 ```
-
